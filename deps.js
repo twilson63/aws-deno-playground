@@ -1,1 +1,1 @@
-export { serve, json } from 'https://deno.land/x/sift@0.3.0/mod.ts'
+export { AWSSignerV4 } from "https://deno.land/x/aws_sign_v4@1.0.1/mod.ts"

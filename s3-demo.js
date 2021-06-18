@@ -1,8 +1,14 @@
-import { S3Client, ListBucketsCommand } from 'https://deno.land/x/aws_sdk@v3.17.0-2/client-s3/mod.ts'
+// create bucket
+import sdk from 'https://jspm.dev/aws-sdk';
 
-const _s3 = new S3Client({ region: 'us-east-1' })
-const cmd = new ListBucketsCommand()
+const s3 = new sdk.S3({
+  credentials: {
+    accessKeyId: Deno.env.get('AWS_ACCESS_KEY_ID'),
+    secretAccessKey: Deno.env.get('AWS_SECRET_ACCESS_KEY')
+  }
+})
 
-const buckets = await _s3.send(cmd)
-
-console.log('buckets', buckets)
+s3.listBuckets((err, results) => {
+  if (err) { return console.log(err) }
+  console.log(results)
+})
